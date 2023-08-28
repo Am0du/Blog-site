@@ -30,9 +30,11 @@
         <!-- TODO: Add code to delete posts below -->
         <p class="post-meta">
           Posted by
-          <a href="{{ url_for('author', name=post.author) }}">{{post.author}}</a>
+          <a href="{{ url_for('author', name=post.author.name) }}">{{post.author.name}}</a>
           on {{post.date}}
-          <a href = "{{ url_for('delete', post_id=post.id) }}">✘</a>
+          {% if current_user.id == post.author.id: %}
+          <a href = "{{ url_for('delete', post_id=post.id, author_id=post.author_id) }}">✘</a>
+          {% endif %}
         </p>
 
       </div>
@@ -41,6 +43,7 @@
       {% endfor %}
 
       <!-- New Post -->
+
       <div class="d-flex justify-content-end mb-4">
       <!-- TODO: Adding new posts -->
         <a
@@ -53,6 +56,7 @@
       <div class="d-flex justify-content-end mb-4">
         <a class="btn btn-secondary text-uppercase" href="#!">Older Posts →</a>
       </div>
+
     </div>
   </div>
 </div>
