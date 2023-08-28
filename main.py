@@ -85,7 +85,7 @@ def show_post(post_id):
             new_comment = Comment(text=form.body.data, author=current_user, parent_post=requested_post,)
             db.session.add(new_comment)
             db.session.commit()
-    return render_template("post.html", post=requested_post, year=year, form=form)
+    return render_template("post.html", post=requested_post, year=year, form=form, logged_in=current_user.is_authenticated)
 
 # TODO: add_new_post() to create a new blog post
 @app.route('/new-post', methods=['POST', 'GET'])
@@ -109,7 +109,7 @@ def new_post():
 
         return redirect(url_for('get_all_posts'))
 
-    return render_template('make-post.html', path='New Post', form=form,year=year)
+    return render_template('make-post.html', path='New Post', form=form,year=year, logged_in=current_user.is_authenticated)
 
 # TODO: edit_post() to change an existing blog post
 @app.route('/edit_post/<pid>', methods=['POST', 'GET'])
