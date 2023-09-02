@@ -24,7 +24,7 @@ gravatar = Gravatar(app,
                     use_ssl=False,
                     base_url=None)
 # CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_url')
 db.init_app(app)
 
 #login manager
